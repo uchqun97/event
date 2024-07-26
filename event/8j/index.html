@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chikka pukka</title>
+</head>
+<body>
+<p>chikka pukka</p>
+
+<button onclick="playGame('chikka')">chikka</button>
+<button onclick="playGame('pukka')">pukka</button>
+
+<button onclick="
+    localStorage.removeItem('hisob'); 
+    alert('O\'yin qayta boshlandi hisoblar 0ga tenglashtirildi'); 
+    location.reload();">
+Qayta boshlash
+</button>
+
+<script>
+    let hisob = JSON.parse(localStorage.getItem('hisob')) || {  loses: 0, wins: 0 };
+
+    function playGame(userChoice){
+        const computer = computerChoice();
+        let result = '';
+
+        if (userChoice === 'chikka'){
+            if(computer === 'pukka'){
+                result = 'Yutqazdingiz';
+            } else if(computer === 'chikka'){
+                result = 'G\'alaba qozondingiz';
+            }
+        } else if (userChoice === 'pukka'){
+            if(computer === 'chikka'){
+                result = 'Yutqazdingiz';
+            } else if(computer === 'pukka'){
+                result = 'G\'alaba qozondingiz';
+            }
+        }
+
+        if (result === 'Yutqazdingiz'){
+            hisob.loses++;
+        } else if (result === 'G\'alaba qozondingiz'){
+            hisob.wins++;
+        }
+
+        localStorage.setItem('hisob', JSON.stringify(hisob));
+
+        alert(
+            `Siz ${userChoice} tanladingiz. Komputer esa ${computer} tanladi. Natijada esa ${result}.
+            G'alaba soni: ${hisob.wins}
+            Mag'lubiyat soni: ${hisob.loses}
+          `
+        );
+    }
+
+    function computerChoice() {
+        const randomNumber = Math.random();
+        if(randomNumber < 0.5) {
+            return 'chikka';
+        } else {
+            return 'pukka';
+        }
+    }
+</script>
+</body>
+</html>

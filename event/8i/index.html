@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chikka pukka</title>
+</head>
+<body>
+    <p>chikka va pukka</p>
+
+    <button onclick="playGame('chikka')">chikka</button>
+    <button onclick="playGame('pukka')">pukka</button>
+
+    <script>
+        function playGame(userChoice) {
+            const computer = computerChoice();
+            let result = '';
+
+            if (userChoice === 'chikka') {
+                if (computer === 'chikka') {
+                    result = 'G\'alaba qozondingiz';
+                } else if (computer === 'pukka') {
+                    result = 'Yutqazdingiz';
+                }
+            } else if (userChoice === 'pukka') {
+                if (computer === 'chikka') {
+                    result = 'Yutqazdingiz';
+                } else if (computer === 'pukka') {
+                    result = 'G\'alaba qozondingiz';
+                }
+            }
+
+            alert(
+                `Siz ${userChoice} tanladingiz. Kompyuter esa ${computer} tanladi. Natijada esa ${result}.`
+            );
+        }
+
+        function computerChoice() {
+            const randomNumber = Math.random();
+            let computer = '';
+            if (randomNumber >= 0 && randomNumber < 0.5) {
+                computer = 'chikka';
+            } else if (randomNumber >= 0.5 && randomNumber < 1) {
+                computer = 'pukka';
+            }
+            return computer;
+        }
+    </script>
+</body>
+</html>
